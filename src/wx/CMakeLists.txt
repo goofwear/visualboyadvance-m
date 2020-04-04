@@ -798,6 +798,13 @@ if(WIN32 AND (AMD64 OR X86_32) AND ENABLE_ONLINEUPDATES)
     list(APPEND HDR_WX autoupdater/wxmsw/winsparkle-rc.h)
 endif()
 
+if(APPLE AND ENABLE_ONLINEUPDATES)
+    list(APPEND HDR_WX autoupdater/autoupdater.h)
+    list(APPEND SRC_WX autoupdater/macos/autoupdater.cpp)
+    list(APPEND SRC_WX autoupdater/macos/sparkle-wrapper.mm)
+    list(APPEND HDR_WX autoupdater/macos/sparkle-wrapper.h)
+endif()
+
 set(
     RES_WX
     ${XRC_SOURCES}
@@ -887,6 +894,11 @@ if(WIN32 AND (AMD64 OR X86_32) AND ENABLE_ONLINEUPDATES)
     endif()
 
     configure_file(autoupdater/wxmsw/winsparkle-path.h.in ${CMAKE_BINARY_DIR}/winsparkle-path.h)
+endif()
+
+if(APPLE AND ENABLE_ONLINEUPDATES)
+    find_package(Sparkle)
+    TARGET_LINK_LIBRARIES(visualboyadvance-m ${SPARKLE_FRAMEWORK})
 endif()
 
 target_link_libraries(
