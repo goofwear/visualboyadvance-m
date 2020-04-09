@@ -5,6 +5,7 @@
 #include "System.h"
 
 #ifdef _WIN32
+#include <windows.h>
 #define FILE_SEP '\\'
 #else // MacOS, Unix
 #define FILE_SEP '/'
@@ -21,6 +22,8 @@ typedef struct {
 } variable_desc;
 
 bool FileExists(const char *filename);
+
+FILE* utilOpenFile(const char *filename, const char *mode);
 
 std::string get_xdg_user_config_home();
 std::string get_xdg_user_data_home();
