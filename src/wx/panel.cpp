@@ -285,7 +285,7 @@ void GameArea::LoadGame(const wxString& name)
 
         rtcEnableRumble(true);
 
-        CPUInit(gopts.gba_bios.mb_fn_str(), useBiosFileGBA);
+        CPUInit(UTF8(gopts.gba_bios), useBiosFileGBA);
 
         if (useBiosFileGBA && !useBios) {
             wxLogError(_("Could not load BIOS %s"), gopts.gba_bios.mb_str());
@@ -409,9 +409,9 @@ void GameArea::LoadGame(const wxString& name)
             bool cld;
 
             if (loaded == IMAGE_GB)
-                cld = gbCheatsLoadCheatList(cfn.GetFullPath().mb_fn_str());
+                cld = gbCheatsLoadCheatList(UTF8(cfn.GetFullPath()));
             else
-                cld = cheatsLoadCheatList(cfn.GetFullPath().mb_fn_str());
+                cld = cheatsLoadCheatList(UTF8(cfn.GetFullPath()));
 
             if (cld) {
                 systemScreenMessage(_("Loaded cheats"));
@@ -496,12 +496,12 @@ void GameArea::UnloadGame(bool destruct)
             if (!gbCheatNumber)
                 wxRemoveFile(cfn.GetFullPath());
             else
-                gbCheatsSaveCheatList(cfn.GetFullPath().mb_fn_str());
+                gbCheatsSaveCheatList(UTF8(cfn.GetFullPath()));
         } else {
             if (!cheatsNumber)
                 wxRemoveFile(cfn.GetFullPath());
             else
-                cheatsSaveCheatList(cfn.GetFullPath().mb_fn_str());
+                cheatsSaveCheatList(UTF8(cfn.GetFullPath()));
         }
     }
 
@@ -585,7 +585,7 @@ bool GameArea::LoadState(int slot)
 bool GameArea::LoadState(const wxFileName& fname)
 {
     // FIXME: first save to backup state if not backup state
-    bool ret = emusys->emuReadState(fname.GetFullPath().mb_fn_str());
+    bool ret = emusys->emuReadState(UTF8(fname.GetFullPath()));
 
     if (ret && num_rewind_states) {
         MainFrame* mf = wxGetApp().frame;
@@ -632,7 +632,7 @@ bool GameArea::SaveState(int slot)
 bool GameArea::SaveState(const wxFileName& fname)
 {
     // FIXME: first copy to backup state if not backup state
-    bool ret = emusys->emuWriteState(fname.GetFullPath().mb_fn_str());
+    bool ret = emusys->emuWriteState(UTF8(fname.GetFullPath()));
     wxGetApp().frame->update_state_ts(true);
     wxString msg;
     msg.Printf(ret ? _("Saved state %s") : _("Error saving state %s"),

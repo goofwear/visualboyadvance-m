@@ -113,8 +113,7 @@ static inline void DoSetAccel(wxMenuItem* mi, wxAcceleratorEntry* acc)
 #define XRCCTRL(win, id, type) XRCCTRL_I(win, XRCID(id), type)
 #define XRCCTRL_D(win, id, type) XRCCTRL_I(win, XRCID_D(id), type)
 
-// wxWidgets provides fn_str(), but no mb_fn_str() or equiv.
-#define mb_fn_str() mb_str(wxConvFile)
+#define UTF8(wxstring) ((wxstring).mb_str(wxConvUTF8))
 
 // by default, only 9 recent items
 #define wxID_FILE10 (wxID_FILE9 + 1)
