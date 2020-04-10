@@ -75,14 +75,14 @@ bool FileExists(const char *filename)
 #ifdef _WIN32
 wchar_t* utf8ToUtf16(const char *utf8)
 {
-    wchar_t *utf16 = NULL;
+    wchar_t *utf16 = nullptr;
     size_t size = MultiByteToWideChar(CP_UTF8, 0, utf8, -1, NULL , 0);
-    if (size == 0) return NULL; // error
+    if (size == 0) return nullptr; // error
     utf16 = new wchar_t[size];
     size = MultiByteToWideChar(CP_UTF8, 0, utf8 , -1, utf16, size);
     if (size == 0) {
         delete[] utf16;
-        return NULL; // error
+        return nullptr; // error
     }
     return utf16;
 }
@@ -93,11 +93,11 @@ FILE* utilOpenFile(const char *filename, const char *mode)
     FILE *f = NULL;
 #ifdef _WIN32
     wchar_t *wfilename = utf8ToUtf16(filename);
-    if (!wfilename) return NULL;
+    if (!wfilename) return nullptr;
     wchar_t *wmode = utf8ToUtf16(mode);
     if (!wmode) {
         delete[] wfilename;
-        return NULL;
+        return nullptr;
     }
 
     f = _wfopen(wfilename, wmode);
@@ -763,7 +763,7 @@ gzFile utilAutoGzOpen(const char *file, const char *mode)
 {
 #ifdef _WIN32
         wchar_t *wfile = utf8ToUtf16(file);
-        if (!wfile) return NULL;
+        if (!wfile) return nullptr;
         gzFile handler = gzopen_w(wfile, mode);
         delete[] wfile;
         return handler;
