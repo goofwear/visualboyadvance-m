@@ -359,7 +359,7 @@ void GameArea::LoadGame(const wxString& name)
 
         if (emusys->emuReadBattery(UTF8(bat.GetFullPath()))) {
             wxString msg;
-            msg.Printf(_("Loaded battery %s"), bat.GetFullPath().mb_str());
+            msg.Printf(_("Loaded battery %s"), bat.GetFullPath().wc_str());
             systemScreenMessage(msg);
 
             if (cpuSaveType == 0 && ovSaveType == 0 && t == IMAGE_GBA) {
@@ -614,7 +614,7 @@ bool GameArea::LoadState(const wxFileName& fname)
 
     wxString msg;
     msg.Printf(ret ? _("Loaded state %s") : _("Error loading state %s"),
-        fname.GetFullPath().mb_str());
+        fname.GetFullPath().wc_str());
     systemScreenMessage(msg);
     return ret;
 }
@@ -638,7 +638,7 @@ bool GameArea::SaveState(const wxFileName& fname)
     wxGetApp().frame->update_state_ts(true);
     wxString msg;
     msg.Printf(ret ? _("Saved state %s") : _("Error saving state %s"),
-        fname.GetFullPath().mb_str());
+        fname.GetFullPath().wc_str());
     systemScreenMessage(msg);
     return ret;
 }

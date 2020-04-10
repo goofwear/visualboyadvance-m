@@ -904,9 +904,9 @@ EVT_HANDLER_MASK(ImportBatteryFile, "Import battery file...", CMDEN_GB | CMDEN_G
         wxString msg;
 
         if (panel->emusys->emuReadBattery(UTF8(fn)))
-            msg.Printf(_("Loaded battery %s"), fn.c_str());
+            msg.Printf(_("Loaded battery %s"), fn.wc_str());
         else
-            msg.Printf(_("Error loading battery %s"), fn.c_str());
+            msg.Printf(_("Error loading battery %s"), fn.wc_str());
 
         systemScreenMessage(msg);
     }
@@ -1022,9 +1022,9 @@ EVT_HANDLER_MASK(ImportGamesharkCodeFile, "Import GameShark code file...", CMDEN
         }
 
         if (res)
-            msg.Printf(_("Loaded code file %s"), fn.c_str());
+            msg.Printf(_("Loaded code file %s"), fn.wc_str());
         else
-            msg.Printf(_("Error loading code file %s"), fn.c_str());
+            msg.Printf(_("Error loading code file %s"), fn.wc_str());
 
         systemScreenMessage(msg);
     }
@@ -1070,9 +1070,9 @@ EVT_HANDLER_MASK(ImportGamesharkActionReplaySnapshot,
         }
 
         if (res)
-            msg.Printf(_("Loaded snapshot file %s"), fn.c_str());
+            msg.Printf(_("Loaded snapshot file %s"), fn.wc_str());
         else
-            msg.Printf(_("Error loading snapshot file %s"), fn.c_str());
+            msg.Printf(_("Error loading snapshot file %s"), fn.wc_str());
 
         systemScreenMessage(msg);
     }
@@ -1095,9 +1095,9 @@ EVT_HANDLER_MASK(ExportBatteryFile, "Export battery file...", CMDEN_GB | CMDEN_G
     wxString msg;
 
     if (panel->emusys->emuWriteBattery(UTF8(fn)))
-        msg.Printf(_("Wrote battery %s"), fn.c_str());
+        msg.Printf(_("Wrote battery %s"), fn.wc_str());
     else
-        msg.Printf(_("Error writing battery %s"), fn.c_str());
+        msg.Printf(_("Error writing battery %s"), fn.wc_str());
 
     systemScreenMessage(msg);
 }
@@ -1138,9 +1138,9 @@ EVT_HANDLER_MASK(ExportGamesharkSnapshot, "Export GameShark snapshot...", CMDEN_
     // fix in GBA.cpp
     if (CPUWriteGSASnapshot(fn.utf8_str(), tit->GetValue().utf8_str(),
             dsc->GetValue().utf8_str(), n->GetValue().utf8_str()))
-        msg.Printf(_("Saved snapshot file %s"), fn.c_str());
+        msg.Printf(_("Saved snapshot file %s"), fn.wc_str());
     else
-        msg.Printf(_("Error saving snapshot file %s"), fn.c_str());
+        msg.Printf(_("Error saving snapshot file %s"), fn.wc_str());
 
     systemScreenMessage(msg);
 }
@@ -1180,7 +1180,7 @@ EVT_HANDLER_MASK(ScreenCapture, "Screen capture...", CMDEN_GB | CMDEN_GBA)
         panel->emusys->emuWriteBMP(UTF8(fn));
 
     wxString msg;
-    msg.Printf(_("Wrote snapshot %s"), fn.c_str());
+    msg.Printf(_("Wrote snapshot %s"), fn.wc_str());
     systemScreenMessage(msg);
 }
 
@@ -2208,7 +2208,7 @@ void MainFrame::GDBBreak()
                 if (!debugOpenPty())
                     return;
 
-                msg.Printf(_("Waiting for connection at %s"), debugGetSlavePty().c_str());
+                msg.Printf(_("Waiting for connection at %s"), debugGetSlavePty().wc_str());
             } else
 #endif
             {
