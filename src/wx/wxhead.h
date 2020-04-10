@@ -113,7 +113,12 @@ static inline void DoSetAccel(wxMenuItem* mi, wxAcceleratorEntry* acc)
 #define XRCCTRL(win, id, type) XRCCTRL_I(win, XRCID(id), type)
 #define XRCCTRL_D(win, id, type) XRCCTRL_I(win, XRCID_D(id), type)
 
-#define UTF8(wxstring) ((wxstring).mb_str(wxConvUTF8))
+// Keep a single entry point for converting wxString to UTF8.
+// Use this function whenever we want to get
+static inline const wxCharBuffer UTF8(wxString str)
+{
+    return str.mb_str(wxConvUTF8);
+}
 
 // by default, only 9 recent items
 #define wxID_FILE10 (wxID_FILE9 + 1)
