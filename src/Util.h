@@ -23,8 +23,6 @@ typedef struct {
 
 bool FileExists(const char *filename);
 
-FILE* utilOpenFile(const char *filename, const char *mode);
-
 std::string get_xdg_user_config_home();
 std::string get_xdg_user_data_home();
 
@@ -56,6 +54,7 @@ int utilReadIntMem(const uint8_t *&data);
 void utilReadMem(void *buf, const uint8_t *&data, unsigned size);
 void utilReadDataMem(const uint8_t *&data, variable_desc *);
 #else
+FILE* utilOpenFile(const char *filename, const char *mode);
 gzFile utilAutoGzOpen(const char *file, const char *mode);
 gzFile utilGzOpen(const char *file, const char *mode);
 gzFile utilMemGzOpen(char *memory, int available, const char *mode);
