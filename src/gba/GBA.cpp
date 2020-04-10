@@ -1714,8 +1714,7 @@ const char* GetSaveDotCodeFile()
 
 void ResetLoadDotCodeFile()
 {
-	if(loadDotCodeFile)
-	{
+    if (loadDotCodeFile) {
         free((char*)loadDotCodeFile);
     }
 
@@ -1729,8 +1728,7 @@ void SetLoadDotCodeFile(const char* szFile)
 
 void ResetSaveDotCodeFile()
 {
-    if (saveDotCodeFile)
-    {
+    if (saveDotCodeFile) {
         free((char*)saveDotCodeFile);
     }
 
