@@ -73,6 +73,8 @@ bool FileExists(const char *filename)
 }
 
 #ifdef _WIN32
+#include <windows.h>
+
 wchar_t* utf8ToUtf16(const char *utf8)
 {
     wchar_t *utf16 = nullptr;
@@ -540,10 +542,6 @@ static bool utilIsImage(const char *file)
 {
         return utilIsGBAImage(file) || utilIsGBImage(file);
 }
-
-#ifdef WIN32
-#include <windows.h>
-#endif
 
 IMAGE_TYPE utilFindType(const char *file, char (&buffer)[2048]);
 

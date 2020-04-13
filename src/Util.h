@@ -5,7 +5,6 @@
 #include "System.h"
 
 #ifdef _WIN32
-#include <stringapiset.h>
 #define FILE_SEP '\\'
 #else // MacOS, Unix
 #define FILE_SEP '/'
